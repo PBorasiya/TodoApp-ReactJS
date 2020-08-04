@@ -13,14 +13,16 @@ class Counter extends Component{
     }
     //to bind the method to class. without this, it will give an error and wont call the method.
     this.increment = this.increment.bind(this)
+    this.decrement = this.decrement.bind(this)
   }
 
   render(){
     return (
       <div className="Counter">
-        <CounterButton incrementMethod={this.increment}/>
-        <CounterButton by={5}  incrementMethod={this.increment}/>
-        <CounterButton by={10} incrementMethod={this.increment}/>
+        <CounterButton incrementMethod={this.increment} decrementMethod={this.decrement}/>
+        <CounterButton by={5}  incrementMethod={this.increment} decrementMethod={this.decrement}/>
+        <CounterButton by={10} incrementMethod={this.increment} decrementMethod={this.decrement}/>
+        
         <span className="count">{this.state.counter}</span>
       </div>
     )
@@ -31,6 +33,15 @@ class Counter extends Component{
     //never access the state directly, use this method given by react to always handle it better and update the values
     this.setState( (prevState) => {
       return {counter : prevState.counter + by}
+    })
+  }
+
+  decrement(by){
+    
+    //never access the state directly, use this method given by react to always handle it better and update the values
+    this.setState( 
+      (prevState) => {
+      return {counter : prevState.counter - by}
     })
   }
 }
@@ -45,6 +56,7 @@ class CounterButton extends Component{
     }
     //to bind the method to class. without this, it will give an error and wont call the method.
     this.increment = this.increment.bind(this)
+    this.decrement = this.decrement.bind(this)
   }
 
   render(){
@@ -52,7 +64,7 @@ class CounterButton extends Component{
       //since the method is inside class, use this keyword to call the  method and bind it before using.
       <div className="CounterButton">
          <button onClick={this.increment}>+{this.props.by}</button>
-        
+         <button onClick={this.decrement}>-{this.props.by}</button>
       </div>
     )
   }
@@ -67,6 +79,12 @@ class CounterButton extends Component{
     this.props.incrementMethod(this.props.by);
   }
 
+  decrement(){
+    this.setState({
+      counter : this.state.counter - this.props.by
+    })
+    this.props.decrementMethod(this.props.by);
+  }
   
 }
 
