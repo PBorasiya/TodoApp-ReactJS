@@ -18,19 +18,20 @@ class Counter extends Component{
   render(){
     return (
       <div className="Counter">
-        <CounterButton/>
-        <CounterButton by={5}/>
-        <CounterButton by={10}/>
+        <CounterButton incrementMethod={this.increment}/>
+        <CounterButton by={5}  incrementMethod={this.increment}/>
+        <CounterButton by={10} incrementMethod={this.increment}/>
+        <span className="count">{this.state.counter}</span>
       </div>
     )
   }
 
-  increment(){
-    console.log("Parent class")
+  increment(by){
+    
     //never access the state directly, use this method given by react to always handle it better and update the values
-    // this.setState({
-    //   counter : this.state.counter + this.props.by
-    // })
+    this.setState({
+      counter : this.state.counter + by
+    })
   }
 }
 
@@ -51,7 +52,7 @@ class CounterButton extends Component{
       //since the method is inside class, use this keyword to call the  method and bind it before using.
       <div className="CounterButton">
          <button onClick={this.increment}>+{this.props.by}</button>
-        <span className="count">{this.state.counter}</span>
+        
       </div>
     )
   }
@@ -63,7 +64,10 @@ class CounterButton extends Component{
     this.setState({
       counter : this.state.counter + this.props.by
     })
+    this.props.incrementMethod(this.props.by);
   }
+
+  
 }
 
 CounterButton.defaultProps ={
