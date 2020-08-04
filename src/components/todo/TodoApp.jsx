@@ -29,8 +29,10 @@ class LoginComponent extends Component{
     render(){
         return(
             <div className="LoginComponent">
-            <ShowInvalidCredential hasLoginFailed={this.state.hasLoginFailed}/>
-            <ShowLoginSuccess showSuccessMessage={this.state.showSuccessMessage}/>
+            {/*<ShowInvalidCredential hasLoginFailed={this.state.hasLoginFailed}/>*/}
+            {this.state.hasLoginFailed && <div>Invalid Credentials!</div>}
+            {this.state.showSuccessMessage && <div>Successful Login!</div>}
+            {/*<ShowLoginSuccess showSuccessMessage={this.state.showSuccessMessage}/>*/}
             UserName : <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
             Password : <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
             <button onClick={this.loginClicked}>Login</button>
@@ -63,18 +65,18 @@ class LoginComponent extends Component{
 
 }
 
-function ShowInvalidCredential(props){
-    if(props.hasLoginFailed){
-        return <div>Invalid Credentials!</div>
-    }
-    return null
-}
+// function ShowInvalidCredential(props){
+//     if(props.hasLoginFailed){
+//         return <div>Invalid Credentials!</div>
+//     }
+//     return null
+// }
 
-function ShowLoginSuccess(props){
-    if(props.showSuccessMessage){
-        return <div>Successful Login!</div>
-    }
-    return null
-}
+// function ShowLoginSuccess(props){
+//     if(props.showSuccessMessage){
+//         return <div>Successful Login!</div>
+//     }
+//     return null
+// }
 
 export default TodoApp
