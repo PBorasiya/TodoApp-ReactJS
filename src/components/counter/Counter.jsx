@@ -35,8 +35,7 @@ class Counter extends Component{
 }
 
 class CounterButton extends Component{
-  //Define the initial state in a constructordsdsadad
-//dsdadsadajdajfdahdahdashdakdasdhsdadkjasjdsadasjdhakdadsadsdsadadasdd
+  //Define the initial state in a constructor
   constructor(){
     //super keyword is necessary in ES6 constructors, without that, it won't bind the values to properties.
     super()
