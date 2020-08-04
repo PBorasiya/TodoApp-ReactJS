@@ -40,13 +40,15 @@ class LoginComponent extends Component{
 
     loginClicked(){
         if(this.state.username==='pranav' && this.state.password==='dummy'){
-            console.log('Successful')
+            
             this.setState({
-                showSuccessMessage : true
+                showSuccessMessage : true,
+                hasLoginFailed: false
             })
         }else{
-            console.log('Failed')
+            
             this.setState({
+                showSuccessMessage : false,
                 hasLoginFailed: true
             })
         }
