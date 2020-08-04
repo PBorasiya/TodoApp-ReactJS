@@ -4,7 +4,6 @@ class TodoApp extends Component{
     render(){
         return (
             <div className="TodoApp">
-                My Todo App Component
                 <LoginComponent/>
             </div>
         )
@@ -18,7 +17,9 @@ class LoginComponent extends Component{
 
         this.state = {
             username : 'pranav',
-            password : ''
+            password : '',
+            hasLoginFailed : false,
+            showSuccessMessage : false
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -28,6 +29,8 @@ class LoginComponent extends Component{
     render(){
         return(
             <div className="LoginComponent">
+            <ShowInvalidCredential hasLoginFailed={this.state.hasLoginFailed}/>
+            <ShowLoginSuccess showSuccessMessage={this.state.showSuccessMessage}/>
             UserName : <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/>
             Password : <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
             <button onClick={this.loginClicked}>Login</button>
@@ -36,7 +39,17 @@ class LoginComponent extends Component{
     }
 
     loginClicked(){
-        console.log(this.state)
+        if(this.state.username==='pranav' && this.state.password==='dummy'){
+            console.log('Successful')
+            this.setState({
+                showSuccessMessage : true
+            })
+        }else{
+            console.log('Failed')
+            this.setState({
+                hasLoginFailed: true
+            })
+        }
     }
 
     handleChange(event) {
@@ -46,6 +59,20 @@ class LoginComponent extends Component{
         })
     }
 
+}
+
+function ShowInvalidCredential(props){
+    if(props.hasLoginFailed){
+        return <div>Invalid Credentials!</div>
+    }
+    return null
+}
+
+function ShowLoginSuccess(props){
+    if(props.showSuccessMessage){
+        return <div>Successful Login!</div>
+    }
+    return null
 }
 
 export default TodoApp
