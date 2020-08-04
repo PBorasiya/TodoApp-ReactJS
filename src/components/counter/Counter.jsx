@@ -29,8 +29,8 @@ class Counter extends Component{
   increment(by){
     
     //never access the state directly, use this method given by react to always handle it better and update the values
-    this.setState({
-      counter : this.state.counter + by
+    this.setState( () => {
+      return {counter : this.state.counter + by}
     })
   }
 }
