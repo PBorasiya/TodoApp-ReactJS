@@ -14,6 +14,7 @@ class Counter extends Component{
     //to bind the method to class. without this, it will give an error and wont call the method.
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
+    this.reset = this.reset.bind(this)
   }
 
   render(){
@@ -24,8 +25,18 @@ class Counter extends Component{
         <CounterButton by={10} incrementMethod={this.increment} decrementMethod={this.decrement}/>
         
         <span className="count">{this.state.counter}</span>
+        <div >
+          <button className="resetButton" onClick={this.reset}>Reset</button>
+        </div>
       </div>
     )
+  }
+
+  reset(){
+    this.setState(
+      (prevState) => {
+      return {counter : 0}
+    })
   }
 
   increment(by){
