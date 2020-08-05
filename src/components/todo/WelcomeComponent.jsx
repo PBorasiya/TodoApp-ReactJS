@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import HelloWorldService from '../../api/todo/HelloWorldService.js'
 
 class WelcomeComponent  extends Component{
     
@@ -25,7 +26,7 @@ class WelcomeComponent  extends Component{
     }
 
     showWelcomeMsg(){
-        console.log(`Welcome ${this.props.match.params.name}`)
+        HelloWorldService.executeHelloWorldService()
     }
 }
 
