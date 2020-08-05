@@ -1,13 +1,20 @@
 class AuthenticationService {
 
     registerSuccessfulLogin(username,password){
-        
-        sessionStorage.setItem('AauthenticatedUser',username)
-
+        console.log('registerSuccessfulLogin')
+        sessionStorage.setItem('authenticatedUser',username)
     }
 
-    logout(){
-        sessionStorage.removeItem('AauthenticatedUser')
+    logOut(){
+        console.log('logOut()')
+        sessionStorage.removeItem('authenticatedUser')
+    }
+
+    isUserLoggedIn(){
+        let user = sessionStorage.getItem('authenticatedUser')
+
+        if(user === null) return false
+        return true
     }
 
 }
