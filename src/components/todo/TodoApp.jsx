@@ -10,6 +10,7 @@ class TodoApp extends Component{
                         <Route path="/" exact component={LoginComponent}/>
                         <Route path="/login" component={LoginComponent}/>
                         <Route path="/welcome/:name" component={WelcomeComponent}/>
+                        <Route path="/todos" component={ListTodosComponent}/>
                         <Route component={ErrorComponent}/>
                     </Switch>
                 </Router>
@@ -22,6 +23,12 @@ class TodoApp extends Component{
 
 function ErrorComponent(){
     return <div>An error occured</div>
+}
+
+class ListTodosComponent  extends Component{
+    render(){
+    return <div>List Todos Component</div>
+    }
 }
 
 
