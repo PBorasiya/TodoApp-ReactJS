@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
+import AuthenticationService from './Authenticationservice.js'
 
 class TodoApp extends Component{
     render(){
@@ -111,11 +112,11 @@ class LoginComponent extends Component{
                     {this.state.showSuccessMessage && <div>Successful Login!</div>}
                     <form>
                     
-                        <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/></div>
+                        <div className="form-group">
+                        <label htmlFor="exampleInputEmail1">Username</label>: <input type="text" name="username" value={this.state.username} onChange={this.handleChange}/></div>
                         
-                        <div class="form-group">
-                        <label for="exampleInputpassword">Password</label>:<input type="password" name="password" value={this.state.password} onChange={this.handleChange}/></div>
+                        <div className="form-group">
+                        <label htmlFor="exampleInputpassword">Password</label>:<input type="password" name="password" value={this.state.password} onChange={this.handleChange}/></div>
                         
                         <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
                     
@@ -127,6 +128,7 @@ class LoginComponent extends Component{
 
     loginClicked(){
         if(this.state.username==='pranav' && this.state.password==='dummy'){
+            AuthenticationService.registerSuccessfulLogin(this.state.username,this.state.password)
             this.props.history.push(`/welcome/${this.state.username}`)
             this.setState({
                // showSuccessMessage : true,
@@ -162,7 +164,7 @@ class HeaderComponent extends Component{
                         </ul>
                         <ul className="navbar-nav navbar-collapse justify-content-end"> 
                             <li><Link to="/login" className="nav-link">Login</Link></li>
-                            <li><Link to="/logout" className="nav-link">LogOut</Link></li>
+                            <li><Link to="/logout" className="nav-link" onClick={AuthenticationService.logout}>LogOut</Link></li>
                         </ul>
                     
                 </nav>
