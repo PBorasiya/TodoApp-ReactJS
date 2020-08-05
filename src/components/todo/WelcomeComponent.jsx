@@ -7,6 +7,10 @@ class WelcomeComponent  extends Component{
     constructor(props){
         super(props)
         this.showWelcomeMsg = this.showWelcomeMsg.bind(this)
+
+        this.state={
+            welcomeMessage : ''
+        }
     }
 
     render(){
@@ -21,13 +25,20 @@ class WelcomeComponent  extends Component{
                     Click here to get the customized welcome message. <hr/>
                    <button className="btn btn-lg btn-info" onClick={this.showWelcomeMsg}>See customized welcome message</button>
                 </div>
+                <div className="container">
+                    {this.state.welcomeMessage}
+                </div>
             </>
         )
     }
 
     showWelcomeMsg(){
         HelloWorldService.executeHelloWorldService()
-        .then( response => console.log(response) )
+        .then( response => (
+            this.setState({
+                welcomeMessage : response.data
+            })
+        ))
         //.catch()
     }
 }
