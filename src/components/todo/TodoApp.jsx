@@ -17,6 +17,11 @@ class TodoApp extends Component{
     }
 }
 
+function ErrorComponent(){
+    return <div>An error occured</div>
+}
+
+
 class WelcomeComponent  extends Component{
     render(){
         return <div>Welcome Pranav</div>
@@ -79,18 +84,5 @@ class LoginComponent extends Component{
 
 }
 
-// function ShowInvalidCredential(props){
-//     if(props.hasLoginFailed){
-//         return <div>Invalid Credentials!</div>
-//     }
-//     return null
-// }
-
-// function ShowLoginSuccess(props){
-//     if(props.showSuccessMessage){
-//         return <div>Successful Login!</div>
-//     }
-//     return null
-// }
 
 export default TodoApp
