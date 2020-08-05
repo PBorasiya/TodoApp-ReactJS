@@ -6,6 +6,7 @@ class TodoApp extends Component{
         return (
             <div className="TodoApp">
                 <Router>
+                    <Route path="/" exact component={LoginComponent}/>
                     <Route path="/login" component={LoginComponent}/>
                     <Route path="/welcome" component={WelcomeComponent}/>
                 </Router>
@@ -55,10 +56,10 @@ class LoginComponent extends Component{
 
     loginClicked(){
         if(this.state.username==='pranav' && this.state.password==='dummy'){
-            
+            this.props.history.push("/welcome")
             this.setState({
-                showSuccessMessage : true,
-                hasLoginFailed: false
+               // showSuccessMessage : true,
+                //hasLoginFailed: false
             })
         }else{
             
