@@ -26,8 +26,44 @@ function ErrorComponent(){
 }
 
 class ListTodosComponent  extends Component{
+    
+    constructor(props){
+        super(props)
+        this.state={
+            todos : 
+            [
+                {id : 1, description : 'Learn React' },
+                {id : 2, description : 'Learn GraphQl'},
+                {id : 3, description : 'Learn Node.js'},
+            ]
+        }
+    }
+    
     render(){
-    return <div>List Todos Component</div>
+    return (
+            <div>
+                <h1>List Todos Component</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       { 
+                        this.state.todos.map(
+                            todo => 
+                                <tr>
+                                    <td>{todo.id}</td>
+                                    <td>{todo.description}</td>
+                                </tr>
+                        )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        )
     }
 }
 
