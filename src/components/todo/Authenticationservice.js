@@ -5,7 +5,10 @@ class AuthenticationService {
     registerSuccessfulLogin(username,password){
         
         sessionStorage.setItem('authenticatedUser',username)
-        this.setupRequestInterceptor()
+
+        let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password)
+
+        this.setupRequestInterceptor(basicAuthHeader)
     }
 
     logOut(){
@@ -26,12 +29,8 @@ class AuthenticationService {
         return user
     }
 
-    setupRequestInterceptor(){
+    setupRequestInterceptor(basicAuthHeader){
 
-        let username = 'pranav'
-        let password = 'dummy'
-
-        let basicAuthHeader = 'Basic ' + window.btoa(username + ":" + password)
         axios.interceptors.request.use(
             (config) => {
                 if(this.isUserLoggedIn()){

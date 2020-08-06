@@ -6,16 +6,16 @@ class HelloWorldService{
 
     executeHelloWorldService(){
 
-        let username = 'pranav'
-         let password = 'dummy'
+        // let username = 'pranav'
+        //  let password = 'dummy'
 
-        let basicAuthHeader = 'Basic '+ window.btoa(username + ":" + password)
-        return axios.get('http://localhost:8080/hello',
-            {
-                headers :{
-                    authorization : basicAuthHeader
-                }
-            }
+        // let basicAuthHeader = 'Basic '+ window.btoa(username + ":" + password)
+         return axios.get('http://localhost:8080/hello',
+        //     {
+        //         headers :{
+        //             authorization : basicAuthHeader
+        //         }
+        //     }
         )
     }
 }
