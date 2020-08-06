@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import moment from 'moment'
 import {Formik, Form, Field, ErrorMessage} from 'formik'
+import TodoDataService from '../../api/todo/TodoDataService.js'
+import AuthenticationService from './AuthenticationService.js'
 
 class TodoComponent extends Component{
     
@@ -9,7 +11,7 @@ class TodoComponent extends Component{
         this.state={
             id: this.props.match.params.id,
             username : "Vishoo",
-            description : "Learn meditation",
+            description : '',
             completed : false,
             targetDate : moment(new Date()).format('YYYY-MM-DD')
         }
@@ -17,6 +19,18 @@ class TodoComponent extends Component{
         this.validate =  this.validate.bind(this)
     }
     
+
+    componentDidMount(){
+        let username = AuthenticationService.getLoggedInUsername()
+        TodoDataService.retrieveTodoById(username,this.state.id)
+        .then(
+            response =>  this.setState({
+                description : response.data.description,
+                targetDate : moment(response.data.targetDate).format('YYYY-MM-DD')
+            })
+        )
+    }
+
     validate(values){
         let errors = {}
         if(!values.description){
@@ -27,7 +41,7 @@ class TodoComponent extends Component{
 
         if(!values.targetDate){
             errors.targetDate = "Enter date"
-        }else if(moment(values.targetDate).isValid){
+        }else if(!moment(values.targetDate).isValid){
             errors.targetDate = "enter valid target date"
         }
         return errors
@@ -51,7 +65,7 @@ class TodoComponent extends Component{
                             validateOnBlur = {false}
                             validateOnChange = {false}
                             validate = {this.validate}
-                            
+                            enableReinitialize = {true}
                     >
                         {
                             (props) => (
@@ -65,7 +79,7 @@ class TodoComponent extends Component{
                                     </fieldset>
                                     <fieldset className="form-group">
                                         <label>Target Date</label>
-                                        <Field className="form-control" type="dare" name="targetDate"/>
+                                        <Field className="form-control" type="date" name="targetDate"/>
                                     </fieldset>
                                     <button className="btn btn-success" type="submit">Submit</button>
                                </Form>
