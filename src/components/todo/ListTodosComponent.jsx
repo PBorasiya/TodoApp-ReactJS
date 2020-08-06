@@ -7,16 +7,17 @@ class ListTodosComponent  extends Component{
     constructor(props){
         super(props)
         this.state={
-            todos : 
-            [
-            // {id : 1, description : 'Learn React' , done: false, targetDate : new Date()},
-            // {id : 2, description : 'Learn GraphQl',done: true, targetDate : new Date()},
-            // {id : 3, description : 'Learn Node.js',done: true, targetDate : new Date()},
-            ]
+            todos : [],
+            message : null
         }
+        this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
     }
 
     componentDidMount(){
+        this.refreshTodos();
+    }
+    
+    refreshTodos(){
         let username = AuthenticationService.getLoggedInUsername()
         TodoDataService.retrieveAllTodos(username)
         .then(
@@ -28,11 +29,26 @@ class ListTodosComponent  extends Component{
         )
         .catch()
     }
-    
+
+    deleteTodoClicked(id){
+        let username = AuthenticationService.getLoggedInUsername()
+        TodoDataService.deleteTodo(username,id)
+        .then(
+            response => {
+                this.setState({
+                    message : `Delete of todo with id ${id} successful for user ${username}`
+                })
+                this.refreshTodos()
+            }
+        )
+
+    }
+
     render(){
     return (
             <div>
                 <h1>List Todos Component</h1>
+                {this.state.message && <div className="alert alert-success">{this.state.message}</div>}
                 <table className="table"> 
                     <thead>
                         <tr>
@@ -41,6 +57,7 @@ class ListTodosComponent  extends Component{
                             <th>Description</th>
                             <th>Done</th>
                             <th>Target Date</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,6 +70,7 @@ class ListTodosComponent  extends Component{
                                     <td>{todo.description}</td>
                                     <td>{todo.completed.toString()}</td>
                                     <td>{todo.targetDate.toString()}</td>
+                                    <td><button className="btn btn-warning" onClick={()=>this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                 </tr>
                         )
                         }
