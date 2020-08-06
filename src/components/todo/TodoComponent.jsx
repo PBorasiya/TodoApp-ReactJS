@@ -9,7 +9,7 @@ class TodoComponent extends Component{
         this.state={
             id: this.props.match.params.id,
             username : "Vishoo",
-            description : "Learn forms",
+            description : "Learn meditation",
             completed : false,
             targetDate : moment(new Date()).format('YYYY-MM-DD')
         }
@@ -18,18 +18,14 @@ class TodoComponent extends Component{
     
     render(){
 
-        let description = this.state.description
-        let targetDate = this.state.targetDate
-
+        let {description,targetDate} = this.state
+      
         return (
             <div>
                 <h1>TODO</h1>
                 <div className="container">
                     <Formik 
-                            initialValues={{
-                                description,
-                                targetDate
-                            }}
+                            initialValues={{description,targetDate}}
                     >
                         {
                             (props) => (
