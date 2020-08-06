@@ -11,6 +11,8 @@ class WelcomeComponent  extends Component{
         this.state={
             welcomeMessage : ''
         }
+
+        this.handleError = this.handleError.bind(this)
     }
 
     render(){
@@ -26,7 +28,7 @@ class WelcomeComponent  extends Component{
                    <button className="btn btn-lg btn-info" onClick={this.showWelcomeMsg}>See customized welcome message</button>
                 </div>
                 <div className="container">
-                    {this.state.welcomeMessage}
+                    <h1>{this.state.welcomeMessage}</h1>
                 </div>
             </>
         )
@@ -39,7 +41,14 @@ class WelcomeComponent  extends Component{
                 welcomeMessage : response.data
             })
         ))
-        //.catch()
+        .catch(error => this.handleError(error))
+    }
+
+    handleError(error){
+        console.log(error)
+        this.setState({
+            welcomeMessage : error.response.data.message
+        })
     }
 }
 
