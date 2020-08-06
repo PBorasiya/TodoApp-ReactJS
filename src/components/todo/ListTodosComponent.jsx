@@ -13,6 +13,8 @@ class ListTodosComponent  extends Component{
         }
         this.deleteTodoClicked = this.deleteTodoClicked.bind(this)
         this.updateTodoClicked = this.updateTodoClicked.bind(this)
+        this.refreshTodos = this.refreshTodos.bind(this)
+        this.addTodoClicked = this.addTodoClicked.bind(this)
     }
 
     componentDidMount(){
@@ -30,6 +32,13 @@ class ListTodosComponent  extends Component{
             }
         )
         .catch()
+    }
+
+
+    addTodoClicked(){
+        console.log('add')
+        //below line is used to redirect from one page to another
+        this.props.history.push(`/todos/-1`)
     }
 
     deleteTodoClicked(id){
@@ -78,7 +87,7 @@ class ListTodosComponent  extends Component{
                                     <td>{todo.username}</td>
                                     <td>{todo.description}</td>
                                     <td>{todo.completed.toString()}</td>
-                                    <td>{moment(todo.targetDate).format('YYYY-MM-DD')}</td>
+                                    <td>{moment(todo.targetDate).utc().format('YYYY-MM-DD')}</td>
                                     
                                     <td><button className="btn btn-warning" onClick={()=>this.deleteTodoClicked(todo.id)}>Delete</button></td>
                                     <td><button className="btn btn-success" onClick={()=>this.updateTodoClicked(todo.id)}>Update</button></td>
@@ -87,6 +96,9 @@ class ListTodosComponent  extends Component{
                         }
                     </tbody>
                 </table>
+                <div className="row">
+                        <button className="btn btn-lg btn-success" onClick={this.addTodoClicked}>Add Todo</button>
+                </div>
             </div>
         )
     }
