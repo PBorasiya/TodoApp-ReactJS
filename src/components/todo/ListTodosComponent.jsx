@@ -96,7 +96,7 @@ class ListTodosComponent  extends Component{
                         }
                     </tbody>
                 </table>
-                <div className="row">
+                <div className="container">
                         <button className="btn btn-lg btn-success" onClick={this.addTodoClicked}>Add Todo</button>
                 </div>
             </div>
