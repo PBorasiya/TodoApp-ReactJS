@@ -11,17 +11,26 @@ class TodoComponent extends Component{
             username : "Vishoo",
             description : "Learn forms",
             completed : false,
-            tarfetDate : moment(new Date()).format('YYYY-MM-DD')
+            targetDate : moment(new Date()).format('YYYY-MM-DD')
         }
         
     }
     
     render(){
+
+        let description = this.state.description
+        let targetDate = this.state.targetDate
+
         return (
             <div>
                 <h1>TODO</h1>
                 <div className="container">
-                    <Formik>
+                    <Formik 
+                            initialValues={{
+                                description,
+                                targetDate
+                            }}
+                    >
                         {
                             (props) => (
                                <Form>
